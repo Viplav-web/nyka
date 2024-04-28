@@ -2,7 +2,7 @@ pipeline {
     agent any 
     
     parameters {
-        choice(name: 'ENV', choices: ['QA', 'UAT'], description: 'Select the environment')
+        string defaultValue: 'DEV', name: 'ENV'
     }
     
     triggers {
@@ -24,10 +24,10 @@ pipeline {
             steps {
                 script {
                     if (env.ENV == 'QA') {
-                        sh 'cp target/nyka.war /home/viplav/Documents/maven/apache-tomcat-9.0.88/webapps'
+                        sh 'cp target/pipeline.war /home/viplav/Documents/maven/apache-tomcat-9.0.88/webapps'
                         echo "Deployment has been COMPLETED on QA!"
                     } else if (env.ENV == 'UAT') {
-                        sh 'cp target/nyka.war /home/viplav/Documents/maven/apache-tomcat-9.0.88/webapps'
+                        sh 'cp target/pipeline.war /home/viplav/Documents/maven/apache-tomcat-9.0.88/webapps'
                         echo "Deployment has been done on UAT!"
                     }
                 }
